@@ -1,0 +1,159 @@
+<!-- {% extends 'base.html' %}
+
+{% block title %}Home - Budget Tracker{% endblock %}
+
+{% block content %}
+<!-- Full-Width Gradient Background with Overlay -->
+ <div class="bg-gradient" style="background: linear-gradient(to right, #6a11cb, #21498e); height: 100vh;"> 
+    <div class="overlay d-flex justify-content-center align-items-center" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(172, 10, 205, 0.5);">
+        <div class="text-center text-light py-5 px-4">
+            <h1 class="display-4 fw-bold animate__animated animate__fadeInUp red">Welcome,<span> {{ user.name }}!</span></h1>
+            <p class="lead fs-4 animate__animated animate__fadeInUp" style="animation-delay: 1s;">
+                Track your finances like never before. Simplify your expenses and income management.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard Overview Section
+<div class="container py-5">
+    <div class="row">
+         Total Income Widget -
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark text-light shadow-lg hover-card" style="border-radius: 15px; position: relative;">
+                <div class="card-header bg-info text-dark">
+                    <h3>Total Income</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2>₹{{ total_income }}</h2>
+                        <i class="bi bi-wallet2" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="progress mt-3">
+                        <div class="progress-bar bg-success" style="width: {{ income_progress }}%;" role="progressbar" aria-valuenow="{{ income_progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        Total Expenses Widget 
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark text-light shadow-lg hover-card" style="border-radius: 15px;">
+                <div class="card-header bg-danger text-light">
+                    <h3>Total Expenses</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2>₹{{ total_expense }}</h2>
+                        <i class="bi bi-credit-card" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="progress mt-3">
+                        <div class="progress-bar bg-danger" style="width: {{ expense_progress }}%;" role="progressbar" aria-valuenow="{{ expense_progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+        Financial Balance Widget 
+        <div class="col-md-4 mb-4">
+            <div class="card bg-dark text-light shadow-lg hover-card" style="border-radius: 15px;">
+                <div class="card-header bg-primary text-dark">
+                    <h3>Your Balance</h3>
+                </div>
+                <div class="card-body">
+                    <h2>₹{{ balance }}</h2>
+                    <p class="lead text-center">
+                        {% if balance >= 0 %}
+                            <h5 style="color:gold
+                            ">You're in the green zone!</h5>
+                        {% else %}
+                            Watch your spending closely.
+                        {% endif %}
+                    </p>
+                    <i class="bi bi-cash-stack" style="font-size: 3rem;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     Graphs for Incomes and Expenses 
+    <div class="row">
+        <div class="col-md-6">
+             <h3 class="text-light">Income Distribution</h3> 
+            <canvas id="incomeChart"></canvas> <!-- Dynamic Chart         </div>
+        <div class="col-md-6">
+             <h3 class="text-light">Expense Distribution</h3> 
+            <canvas id="expenseChart"></canvas> Dynamic Chart -->
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+<!-- Adding Extra CSS and JS for Animations and Charts -->
+{% block extra_css %}
+<style>
+    /* Hover Effects */
+    .hover-card:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* Gradient Background */
+    .bg-gradient {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: rgb(29, 182, 220);
+    }
+
+    /* Button Hover Effect */
+    .btn:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
+
+    /* Custom Animations */
+    .animate__fadeInUp {
+        animation: fadeInUp 1.5s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Income Chart
+    var incomeCtx = document.getElementById('incomeChart').getContext('2d');
+    var incomeChart = new Chart(incomeCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Category 1', 'Category 2', 'Category 3'], // Dynamically generated
+            datasets: [{
+                label: 'Income Distribution',
+                data: [3000, 5000, 2000], // Dynamically generated data
+                backgroundColor: ['#36A2EB', '#FFCE56', '#FF6384']
+            }]
+        }
+    });
+
+    // Expense Chart
+    var expenseCtx = document.getElementById('expenseChart').getContext('2d');
+    var expenseChart = new Chart(expenseCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Category A', 'Category B', 'Category C'], // Dynamically generated
+            datasets: [{
+                label: 'Expense Distribution',
+                data: [2000, 1500, 1000], // Dynamically generated data
+                backgroundColor: ['#FF5733', '#C70039', '#900C3F']
+            }]
+        }
+    });
+</script>
+{% endblock %} 
